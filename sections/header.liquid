@@ -59,6 +59,10 @@
 </style>
 {%- endif -%}
 
+    
+<nav class="navigation" role="navigation" id="NavStandard">
+  <ul class="nav nav--default{% if settings.nav_caps %} caps{% endif %}" id="AccessibleNav">
+    <li>
 {%- capture logo_not_home -%}
 	{%- assign image = section.settings.logo_not_home -%}
 	{%- if image != blank -%}
@@ -129,9 +133,8 @@
 {%- if section.settings.logo != blank or section.settings.logo_not_home != blank or section.settings.show_shop_name -%}
   {%- assign has_logo = true -%}
 {%- endif -%}
+    </li>
 
-<nav class="navigation" role="navigation" id="NavStandard">
-  <ul class="nav nav--default{% if settings.nav_caps %} caps{% endif %}" id="AccessibleNav">
     <li class="nav__item nav__item--compress">
       <button type="button" class="icon-fallback-text nav__link nav__link--icon js-drawer-open-nav" aria-controls="NavDrawer" data-drawer="left">
         <span class="visually-hidden">{{ 'general.accessibility.mobile_menu_toggle' | t }}</span>
@@ -142,7 +145,7 @@
         {%- render 'icon-shopping-bag' -%}
       </a>
     </li>
-
+	<div class="nav__center-items">
     {%- for link in linklists[section.settings.main-menu].links -%}
 
       {%- capture dropdown_links -%}
@@ -372,11 +375,12 @@
 
         </li>
       {%- else -%}
-        <li class="nav__item nav__item--level-1 nav__item--default" nav-item>
+        <li class="testing nav__item nav__item--level-1 nav__item--default" nav-item>
           <a href="{{ link.url }}" class="nav__link{% if link.active %} nav__link--active{% endif %}">{{ link.title | escape }}</a>
         </li>
       {%- endif -%}
     {%- endfor -%}
+    </div>
 
     <li class="nav__item nav__item--default nav__item--icons" nav-item>
       <ul class="nav__icons">
