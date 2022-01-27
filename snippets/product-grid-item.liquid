@@ -69,6 +69,14 @@
   {% endif %}
   data-product-id="{{ product.id }}"
 >
+  <div class="product-grid-item__buttons">
+    <button type="submit" name="add" class="product-grid-item__button add-to-cart__button">
+      ADD TO CART
+    </button>
+    <button type="submit" name="learn" class="product-grid-item__button learn-more__button">
+      LEARN MORE
+    </button>
+  </div>
   {%- comment -%} Image {%- endcomment -%}
   <div class="product-grid-item__image" data-product-media-container>
     {%- assign image = featured_media.preview_image -%}
