@@ -11653,11 +11653,16 @@ input[type="radio"].variant-input {
 .product-form__radio-input:checked {
   border: 5px solid #ED6F43 !important;
 }
+.quantity-wrapper {
+  max-width: 25%;
+}
 .product-form__submit-btn {
   font-weight: 700;
   font-size: 25px;
   background-color: #ED6F43;
   border: 1px solid #ED6F43;
+  padding: 0;
+  width: 70% !important;
 }
 .product-form__quantity-select {
   font-weight: 700;
@@ -11665,9 +11670,29 @@ input[type="radio"].variant-input {
   color: #FFFFFF;
   background-color: #ED6F43;
   border: 1px solid #ED6F43 !important;
+  width: 2em;
 }
 .product-form__quantity-btn {
+  position: relative;
   color: #FFFFFF;
   font-size: 25px;
   font-weight: 700;
+}
+.product-form__add-to-cart-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ED6F43;
+}
+.product-form__quantity-div {
+  display: flex;
+  align-items: center;
+  margin-left: 1em;
+}
+.product-form__btn-divider {
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+}
+.product-form_btn-price {
+  margin-right: 1em;
 }
