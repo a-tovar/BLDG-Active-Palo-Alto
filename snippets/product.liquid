@@ -266,7 +266,19 @@
             {%- comment -%} Product Description and product tabs {%- endcomment -%}
             <div class="product__description rte" {{ block.shopify_attributes }}>
               {%- unless product == blank -%}
-                {{- product.description -}}
+                <div class="product-tab">
+                  <button class="product-tab__title is-expanded" aria-controls="ProductTab--page-description" data-collapsible-trigger>
+                    Description
+                    {%- render 'icon-plus' -%}
+                    {%- render 'icon-minus' -%}
+                  </button>
+          
+                  <div class="product-tab__content is-expanded" id="ProductTab--page-description" style="height: auto;" data-collapsible-container>
+                    <div class="product-tab__inner rte" data-collapsible-content>
+                      {{- product.description -}}
+                    </div>
+                  </div>
+                </div>
 
                 {%- if template == 'product' and block.settings.tabs_style != 'tabs_disabled' and section_type != 'featured' -%}
                   {%- render 'product-tabs', block_settings: block.settings -%}
