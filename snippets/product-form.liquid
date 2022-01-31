@@ -142,13 +142,13 @@
   {%- endcomment -%}
   <div class="buttons-grid{% if show_payment_button %} buttons-grid--half{% endif %}">
     <!-- TODO: fix styling -->
-    <div style="display: flex; background-color: blue;">
+    <div class="product-form__add-to-cart-div">
       {%- if settings.show_quantity -%}
         {%- comment -%}
           Quantity Selector
         {%- endcomment -%}
         <div class="quantity-wrapper{% if enable_variant_boxes %} quantity-wrapper--half{% endif %}">
-          <div class="popout" data-popout-option>
+          <div class="product-form__quantity-div popout" data-popout-option>
             <button type="button" class="product-form__quantity-btn quantity__btn quantity__btn--decrease" data-quantity-button>
               <span class="visually-hidden">{{ 'general.accessibility.decrease' | t }}</span>
               {%- render 'icon-minus' -%}
@@ -183,7 +183,8 @@
             {{- 'products.product.add_to_cart' | t -}}
           {%- endif -%}
         </span>
-        <span>| {{ current_variant.price | money }}</span>
+        <span class="product-form__btn-divider">|</span>
+        <span class="product-form_btn-price">{{ current_variant.price | money }}</span>
         {%- render 'icon-loading' -%}
       </button>
     </div>
