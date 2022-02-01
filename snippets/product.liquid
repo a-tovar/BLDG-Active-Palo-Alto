@@ -41,6 +41,9 @@
   .prodcut-media__image {
     display: none;
   }
+  .product-media__bottom {
+    display: none;
+  }
   @media only screen and (min-width: 1024px) {
     .product-single__wrapper {
       display: flex;
@@ -72,6 +75,12 @@
     }
     .prodcut-media__image {
       display: block;
+    }
+    .product-media__bottom {
+      display: block;
+      height: 380px;
+      width: calc(100% + 120px);
+      margin-left: -60px;
     }
   }
 </style>
@@ -281,6 +290,9 @@
                     <a href="{{ product_url }}" title="{{ product_title }}">{{ product_title }}</a>
                   {%- endif -%}
                 </h1>
+
+                {%- comment -%} Product short description {%- endcomment -%}
+                <p>{{product.metafields.additional_meta.short_description}}</p>
   
                 <div class="product__price-and-badge">
     {%- if block.settings.show_rating or settings.show_rating and section_type == 'quickview' -%}
@@ -426,6 +438,19 @@
     {% endfor %}
     {% endunless %}
   </div>
+
+  {%- unless section_type == 'quickview' -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'media2' -%}
+        <div class="product-media__bottom image-column__image{% unless image_mobile == blank %} image-column__image--desktop{% endunless %} lazyload"
+          data-bgset="{% render 'bgset', image: block.settings.desktop_bottom_image %}"
+          data-parent-fit="cover"
+          data-sizes="auto">
+        </div>
+    {%- endcase -%}
+  {% endfor %}
+  {% endunless %}
 
 </div>
 
