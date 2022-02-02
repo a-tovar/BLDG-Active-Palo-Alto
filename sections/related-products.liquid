@@ -28,7 +28,7 @@
           {%- if heading != blank -%}
             <div class="featured-collection__title">
               <div class="wrapper">
-                <h2 class="featured-collection__heading section__heading h4">{{ heading }}</h2>
+                <h2 class="related-products__heading featured-collection__heading section__heading h4">{{ heading }}</h2>
 
                 {%- if settings.show_spacer_lines -%}
                   <hr>
@@ -39,9 +39,11 @@
 
           <div class="wrapper">
             <div class="carousel__container">
-              <div class="carousel" data-collection-slider>
+              <div class="related-products__div carousel" data-collection-slider>
                 {%- for product in recommendations.products -%}
-                  {%- render 'product-grid-item', product: product, carousel: true -%}
+                  <div class="product-grid-item__div">
+                    {%- render 'product-grid-item', product: product, carousel: false -%}
+                  </div>
                 {%- endfor -%}
               </div>
             </div>
@@ -79,7 +81,7 @@
       "type": "text",
       "id": "product_recommendations_heading",
       "label": "Heading",
-      "default": "You May Also Like"
+      "default": "Related Products"
     },
     {
 			"type": "header",
