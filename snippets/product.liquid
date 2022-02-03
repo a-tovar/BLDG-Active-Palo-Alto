@@ -73,22 +73,49 @@
     }
   }
 
-  .product__form__wrapper.sticky {
+  .product__form-sticky {
     display: none;
     position: sticky;
     bottom: 40px;
     max-width: 500px;
+    z-index: 1;
   }
   @media only screen and (max-width: 1023px) {
-    .product__form__wrapper.sticky {
+    .product__form-sticky {
       margin: auto;
+    }
+    .product__form-sticky-title {
+      display: none;
     }
   }
   @media only screen and (min-width: 1024px) {
-    .product__form__wrapper.sticky {
-      bottom: 80%;
-      margin-left: auto;
+    .product__form-sticky {
+      position: fixed;
+      right: 0;
+      bottom: unset;
+      top: var(--gutter);
+      width: 100%;
+      max-width: unset;
+      display: flex;
+      background-color: white;
+      padding-bottom: 10px;
+    }
+    .product__form-sticky > .product__form__wrapper {
       max-width: 450px;
+      flex: 1;
+      gap: 0;
+      margin-right: var(--gutter);
+    }
+    .product__form-sticky .product__form {
+      gap: 0;
+    }
+    .product__form-sticky .product-form__add-to-cart-div {
+      height: unset;
+    }
+    .product__form-sticky > .product__title {
+      align-self: center;
+      flex: 1;
+      padding-left: var(--gutter);
     }
   }
 </style>
@@ -314,15 +341,13 @@
   
             {%- when 'form' -%}
               {%- unless product == blank -%}
-                <div>
-                  <div class="product__form__wrapper" data-product-form-wrapper {{ block.shopify_attributes }}>
-                    {%- comment -%} Product Form Snippet {%- endcomment -%}
-                    {%- render 'product-form', product: product, current_variant: current_variant, show_payment_button: block.settings.show_payment_button, unique: unique -%}
-    
-                    {%- if settings.show_newsletter -%}
-                      {%- render 'notification-form', sold_out: sold_out, product_title: product.title, product_id: product.id -%}
-                    {%- endif -%}
-                  </div>
+                <div class="product__form__wrapper" data-product-form-wrapper {{ block.shopify_attributes }}>
+                  {%- comment -%} Product Form Snippet {%- endcomment -%}
+                  {%- render 'product-form', product: product, current_variant: current_variant, show_payment_button: block.settings.show_payment_button, unique: unique -%}
+  
+                  {%- if settings.show_newsletter -%}
+                    {%- render 'notification-form', sold_out: sold_out, product_title: product.title, product_id: product.id -%}
+                  {%- endif -%}
                 </div>
               {%- else -%}
                 {%- render 'product-form-onboarding', show_payment_button: block.settings.show_payment_button -%}
@@ -457,13 +482,16 @@
   {%- case block.type -%}
     {%- when 'form' -%}
     {%- unless product == blank -%}
-    <div class="product__form__wrapper sticky" data-product-form-wrapper {{ block.shopify_attributes }}>
-      {%- comment -%} Product Form Snippet {%- endcomment -%}
-      {%- render 'product-form', product: product, current_variant: current_variant, show_payment_button: block.settings.show_payment_button, unique: unique -%}
-
-      {%- if settings.show_newsletter -%}
-        {%- render 'notification-form', sold_out: sold_out, product_title: product.title, product_id: product.id -%}
-      {%- endif -%}
+    <div class="product__form-sticky">
+      <h1 class="product__title">{{ product_title }}</h1>
+      <div class="product__form__wrapper" data-product-form-wrapper {{ block.shopify_attributes }}>
+        {%- comment -%} Product Form Snippet {%- endcomment -%}
+        {%- render 'product-form', product: product, current_variant: current_variant, show_payment_button: block.settings.show_payment_button, unique: unique -%}
+  
+        {%- if settings.show_newsletter -%}
+          {%- render 'notification-form', sold_out: sold_out, product_title: product.title, product_id: product.id -%}
+        {%- endif -%}
+      </div>
     </div>
     {%- endunless -%}
   {%- endcase -%}
@@ -476,12 +504,12 @@
 <script>
   $(function(){
     let atcButton = $('.product__form__wrapper').first();
-    let atcButtonSticky = $('.product__form__wrapper.sticky');
-    $(window).scroll(function() {
+    let atcButtonSticky = $('.product__form-sticky');
+    const scrollFunction = () => {
       let windowWidth = $(document).width();
       let windowScrollPos = $(document).scrollTop();
       let atcButtonPos = atcButton.offset().top;
-
+  
       // Desktop - sticky button in top right
       if (windowWidth > 1023) {
         if (windowScrollPos > atcButtonPos + 100) {
@@ -500,6 +528,10 @@
           atcButtonSticky.fadeOut('fast');
         }
       }
+    }
+    $(window).scroll(function() {
+      scrollFunction();
     });
+    scrollFunction();
   });
 </script>

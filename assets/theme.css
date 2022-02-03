@@ -11711,6 +11711,7 @@ input[type="radio"].variant-input {
   align-items: center;
   justify-content: space-between;
   background-color: #ed6f43;
+  border-radius: 3px;
 }
 .product-form__quantity-div {
   display: flex;
@@ -11723,41 +11724,53 @@ input[type="radio"].variant-input {
   text-align: start;
 }
 .related-products__div {
-    padding-top: 20px;
-    display: grid;
-    grid-template-columns: 100%;
-    gap: 50px;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding-left: 0;
-    padding-right: 0;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 50px;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 .product-grid-item__div {
-    width: 95vw;
-    height: calc(80vw / .66);
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+  width: 95vw;
+  height: calc(80vw / 0.66);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 /* selects the product card buttons only from related-products scope */
-.product-grid-item__div > div > div[class="product-grid-item__buttons"] > .product-grid-item__button{
+.product-grid-item__div
+  > div
+  > div[class="product-grid-item__buttons"]
+  > .product-grid-item__button {
   width: 43%;
   height: 33px;
 }
-.product-grid-item__div > div > div[class="product-grid-item__info"] > .product-grid-item__title {
+.product-grid-item__div
+  > div
+  > div[class="product-grid-item__info"]
+  > .product-grid-item__title {
   font-size: 30px;
   line-height: 30px;
   font-weight: 200;
 }
-.product-grid-item__div > div > div[class="product-grid-item__info"] > .product-grid-item__description {
+.product-grid-item__div
+  > div
+  > div[class="product-grid-item__info"]
+  > .product-grid-item__description {
   font-size: 14px;
   line-height: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 5px;
 }
-.product-grid-item__div > div > div[class="product-grid-item__info"] > .product-grid-item__price {
+.product-grid-item__div
+  > div
+  > div[class="product-grid-item__info"]
+  > .product-grid-item__price {
   font-size: 22px;
   line-height: 22px;
   padding-left: 5px;
@@ -11963,19 +11976,28 @@ input[type="radio"].variant-input {
     width: 100%;
     height: 100%;
   }
-  .product-grid-item__div > div > div[class="product-grid-item__info"] > .product-grid-item__title {
+  .product-grid-item__div
+    > div
+    > div[class="product-grid-item__info"]
+    > .product-grid-item__title {
     font-size: 22px;
     line-height: 22px;
     font-weight: 200;
   }
-  .product-grid-item__div > div > div[class="product-grid-item__info"] > .product-grid-item__description {
+  .product-grid-item__div
+    > div
+    > div[class="product-grid-item__info"]
+    > .product-grid-item__description {
     font-size: 14px;
     line-height: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 5px;
   }
-  .product-grid-item__div > div > div[class="product-grid-item__info"] > .product-grid-item__price {
+  .product-grid-item__div
+    > div
+    > div[class="product-grid-item__info"]
+    > .product-grid-item__price {
     font-size: 18px;
     line-height: 18px;
     padding-left: 5px;
@@ -12177,7 +12199,7 @@ input[type="radio"].variant-input {
 @media only screen and (min-width: 385px) and (max-width: 720px) {
   .product-grid-item__div {
     width: 75vw;
-    height: calc(75vw / .66);
+    height: calc(75vw / 0.66);
   }
   .product-grid-item__div > .product-grid-item {
     width: 100%;
