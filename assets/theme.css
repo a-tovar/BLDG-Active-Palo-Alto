@@ -9264,6 +9264,7 @@ button.collection__filters__toggle {
 }
 .product-single {
   padding: var(--gutter) 0;
+  padding-top: 40px;
 }
 .product-single__variants {
   display: none;

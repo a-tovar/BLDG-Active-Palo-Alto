@@ -13,28 +13,6 @@
 {%- endcomment -%}
 
 <style>
-  @media only screen and (max-width: 1023px) {
-    .breadcrumbs-desktop {
-      display: none;
-    }
-  }
-
-  .breadcrumbs-mobile {
-    display: none;
-  }
-  @media only screen and (max-width: 1023px) {
-    .breadcrumbs-mobile {
-      display: block;
-    }
-  }
-
-  .product-row-1 {
-    padding-bottom: 50px;
-  }
-  .product-row-2 {
-    display: flex;
-    flex-direction: column-reverse;
-  }
   .product__additional-media {
     padding-bottom: 30px;
   }
@@ -46,29 +24,23 @@
   }
   @media only screen and (min-width: 1024px) {
     .product-single__wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    .product-row-1 {
-      display: flex;
-      gap: 75px;
-      padding-bottom: 0;
+      gap: 80px;
+      padding-bottom: var(--gutter);
     }
     .product-single__gallery {
-      width: 40%;
-    }
-    .product-row-2 {
-      flex-direction: row;
-      gap: 150px;
-      justify-content: center;
-      text-align: center;
+      padding: 0 20px;
     }
     .product__description {
-      flex: 1;
+      padding-top: var(--gutter);
     }
     .product__additional-media {
-      flex: 1;
       padding-bottom: 0;
+    }
+    .product__additional-media.desktop {
+      padding-top: var(--gutter);
+    }
+    .product__additional-media.mobile {
+      display: none;
     }
     .product-media__video {
       padding-bottom: 20px;
@@ -81,6 +53,42 @@
       height: 380px;
       width: calc(100% + 120px);
       margin-left: -60px;
+    }
+  }
+  @media only screen and (max-width: 1023px) {
+    .product-single__gallery {
+      max-width: 75%;
+      margin: auto;
+    }
+    .product__additional-media.desktop {
+      display: none;
+    }
+    .product__additional-media.mobile {
+      padding: 60px 5px 30px 5px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .product-single__gallery {
+      max-width: unset;
+    }
+  }
+
+  .product__form__wrapper.sticky {
+    display: none;
+    position: sticky;
+    bottom: 40px;
+    max-width: 500px;
+  }
+  @media only screen and (max-width: 1023px) {
+    .product__form__wrapper.sticky {
+      margin: auto;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    .product__form__wrapper.sticky {
+      bottom: 80%;
+      margin-left: auto;
+      max-width: 450px;
     }
   }
 </style>
@@ -116,20 +124,7 @@
   endif
 -%}
 
-{%- comment -%} Breadcrumb - desktop only {%- endcomment -%}
-{%- unless section_type == 'quickview' -%}
-  {%- for block in section.blocks -%}
-    {%- case block.settings.subheading -%}
-      {%- when 'breadcrumbs' -%}
-        <div class="breadcrumbs-desktop">
-          {%- render 'breadcrumbs' -%}
-        </div>
-    {%- endcase -%}
-  {%- endfor -%}
-{%- endunless -%}
-
 <div class="product-single__wrapper" data-section-id="{{ unique }}" data-product>
-  <div class="product-row-1">
     {%- comment -%} Product media {%- endcomment -%}
     {%- unless product == blank -%}
       <div class="product-single__gallery"
@@ -206,6 +201,18 @@
               {%- endfor -%}
             </div>
           {%- endif -%}
+        {%- endunless -%}
+        
+        {%- unless section_type == 'quickview' -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'media' -%}
+            <div class="product__additional-media desktop">
+              <iframe class="product-media__video" width="560" height="315" src={{ block.settings.additional_video_url | strip_html }} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <img class="prodcut-media__image" src={{ block.settings.additional_image_url | strip_html }} alt={{ block.settings.additional_image_alt | strip_html }}>
+            </div>
+          {%- endcase %}
+        {%- endfor -%}
         {%- endunless -%}
       </div>
     {%- else -%}
@@ -307,13 +314,15 @@
   
             {%- when 'form' -%}
               {%- unless product == blank -%}
-                <div class="product__form__wrapper" data-product-form-wrapper {{ block.shopify_attributes }}>
-                  {%- comment -%} Product Form Snippet {%- endcomment -%}
-                  {%- render 'product-form', product: product, current_variant: current_variant, show_payment_button: block.settings.show_payment_button, unique: unique -%}
-  
-                  {%- if settings.show_newsletter -%}
-                    {%- render 'notification-form', sold_out: sold_out, product_title: product.title, product_id: product.id -%}
-                  {%- endif -%}
+                <div>
+                  <div class="product__form__wrapper" data-product-form-wrapper {{ block.shopify_attributes }}>
+                    {%- comment -%} Product Form Snippet {%- endcomment -%}
+                    {%- render 'product-form', product: product, current_variant: current_variant, show_payment_button: block.settings.show_payment_button, unique: unique -%}
+    
+                    {%- if settings.show_newsletter -%}
+                      {%- render 'notification-form', sold_out: sold_out, product_title: product.title, product_id: product.id -%}
+                    {%- endif -%}
+                  </div>
                 </div>
               {%- else -%}
                 {%- render 'product-form-onboarding', show_payment_button: block.settings.show_payment_button -%}
@@ -322,6 +331,39 @@
             {%- when 'pickup-availability' -%}
               {%- comment -%} Surface pickup availability {%- endcomment -%}
               <div class="product-single__store-availability-container" data-store-availability-container {{ block.shopify_attributes }}></div>
+
+            {%- when 'media' -%}
+              {%- comment -%} Product additional media {%- endcomment -%}
+              <div class="product__additional-media mobile">
+                <iframe class="product-media__video" width="560" height="315" src={{ block.settings.additional_video_url | strip_html }} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <img class="prodcut-media__image" src={{ block.settings.additional_image_url | strip_html }} alt={{ block.settings.additional_image_alt | strip_html }}>
+              </div>
+  
+            {%- when 'description' -%}
+              {%- comment -%} Product Description and product tabs {%- endcomment -%}
+              <div class="product__description rte" {{ block.shopify_attributes }}>
+                {%- unless product == blank -%}
+                  <div class="product-tab">
+                    <button class="product-tab__title is-expanded" aria-controls="ProductTab--page-description" data-collapsible-trigger>
+                      Description
+                      {%- render 'icon-plus' -%}
+                      {%- render 'icon-minus' -%}
+                    </button>
+            
+                    <div class="product-tab__content is-expanded" id="ProductTab--page-description" style="height: auto;" data-collapsible-container>
+                      <div class="product-tab__inner rte" data-collapsible-content>
+                        {{- product.description -}}
+                      </div>
+                    </div>
+                  </div>
+  
+                  {%- if template == 'product' and block.settings.tabs_style != 'tabs_disabled' and section_type != 'featured' -%}
+                    {%- render 'product-tabs', block_settings: block.settings -%}
+                  {%- endif -%}
+                {%- else -%}
+                  <p>{{ 'homepage.onboarding.single_product_description' | t }}</p>
+                {%- endunless -%}
+              </div>
   
             {%- when 'social-sharing' -%}
               {%- comment -%} Social Icons {%- endcomment -%}
@@ -380,7 +422,7 @@
         </span>
       {%- endif -%}
       </p>
-  </div>
+    </div>
   
         <div class="product__form__wrapper" data-product-form-wrapper>
           {%- comment -%} Product Form Snippet {%- endcomment -%}
@@ -394,65 +436,70 @@
         <a class="product__view-button" href="{{ product.url }}">{{ 'products.general.view_all_details' | t }}</a>
       {%- endunless -%}
     </div>
-  </div>
-
-  <div class="product-row-2">
-    {%- unless section_type == 'quickview' -%}
-    {%- for block in section.blocks -%}
-      {%- case block.type -%}
-        {%- when 'description' -%}
-        {%- comment -%} Product description & tabs {%- endcomment -%}
-        <div class="product__description rte" {{ block.shopify_attributes }}>
-          {%- unless product == blank -%}
-            <div class="product-tab">
-              <button class="product-tab__title is-expanded" aria-controls="ProductTab--page-description" data-collapsible-trigger>
-                Description
-                {%- render 'icon-plus' -%}
-                {%- render 'icon-minus' -%}
-              </button>
-      
-              <div class="product-tab__content is-expanded" id="ProductTab--page-description" style="height: auto;" data-collapsible-container>
-                <div class="product-tab__inner rte" data-collapsible-content>
-                  {{- product.description -}}
-                </div>
-              </div>
-            </div>
-      
-            {%- if template == 'product' and block.settings.tabs_style != 'tabs_disabled' and section_type != 'featured' -%}
-              {%- render 'product-tabs', block_settings: block.settings -%}
-            {%- endif -%}
-          {%- else -%}
-            <p>{{ 'homepage.onboarding.single_product_description' | t }}</p>
-          {%- endunless -%}
-        </div>
-
-        {%- when 'media' -%}
-        {%- comment -%} Product additional media {%- endcomment -%}
-        <div class="product__additional-media">
-          <!-- TODO: put in some kind of fallback/default for these -->
-          <iframe class="product-media__video" width="560" height="315" src={{ block.settings.additional_video_url | strip_html }} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <img class="prodcut-media__image" src={{ block.settings.additional_image_url | strip_html }} alt={{ block.settings.additional_image_alt | strip_html }}>
-        </div>
-
-      {% endcase %}
-    {% endfor %}
-    {% endunless %}
-  </div>
-
-  {%- unless section_type == 'quickview' -%}
-  {%- for block in section.blocks -%}
-    {%- case block.type -%}
-      {%- when 'media2' -%}
-        <div class="product-media__bottom image-column__image{% unless image_mobile == blank %} image-column__image--desktop{% endunless %} lazyload"
-          data-bgset="{% render 'bgset', image: block.settings.desktop_bottom_image %}"
-          data-parent-fit="cover"
-          data-sizes="auto">
-        </div>
-    {%- endcase -%}
-  {% endfor %}
-  {% endunless %}
 
 </div>
 
+{%- unless section_type == 'quickview' -%}
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'banner-bottom' -%}
+      <div class="product-media__bottom image-column__image{% unless image_mobile == blank %} image-column__image--desktop{% endunless %} lazyload"
+        data-bgset="{% render 'bgset', image: block.settings.desktop_bottom_image %}"
+        data-parent-fit="cover"
+        data-sizes="auto">
+      </div>
+  {%- endcase -%}
+{% endfor %}
+{% endunless %}
+
+{%- unless section_type == 'quickview' -%}
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'form' -%}
+    {%- unless product == blank -%}
+    <div class="product__form__wrapper sticky" data-product-form-wrapper {{ block.shopify_attributes }}>
+      {%- comment -%} Product Form Snippet {%- endcomment -%}
+      {%- render 'product-form', product: product, current_variant: current_variant, show_payment_button: block.settings.show_payment_button, unique: unique -%}
+
+      {%- if settings.show_newsletter -%}
+        {%- render 'notification-form', sold_out: sold_out, product_title: product.title, product_id: product.id -%}
+      {%- endif -%}
+    </div>
+    {%- endunless -%}
+  {%- endcase -%}
+{% endfor %}
+{% endunless %}
+
 <script type="application/json" id="ProductJson-{{ unique }}" data-product-json>{{ product | json }}</script>
 <script type="application/json" id="ModelJson-{{ unique }}">{{ product.media | where: 'media_type', 'model' | json }}</script>
+
+<script>
+  $(function(){
+    let atcButton = $('.product__form__wrapper').first();
+    let atcButtonSticky = $('.product__form__wrapper.sticky');
+    $(window).scroll(function() {
+      let windowWidth = $(document).width();
+      let windowScrollPos = $(document).scrollTop();
+      let atcButtonPos = atcButton.offset().top;
+
+      // Desktop - sticky button in top right
+      if (windowWidth > 1023) {
+        if (windowScrollPos > atcButtonPos + 100) {
+          atcButtonSticky.fadeIn('fast');
+        }
+        else {
+          atcButtonSticky.fadeOut('fast');
+        }
+      }
+      // Mobile - sticky button on bottom
+      else {
+        if (windowScrollPos > atcButtonPos + 120) {
+          atcButtonSticky.fadeIn('fast');
+        }
+        else {
+          atcButtonSticky.fadeOut('fast');
+        }
+      }
+    });
+  });
+</script>
