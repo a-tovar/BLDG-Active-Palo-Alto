@@ -66,7 +66,7 @@
 {%- capture logo_not_home -%}
 	{%- assign image = section.settings.logo_not_home -%}
 	{%- if image != blank -%}
-		<a href="{{ routes.root_url }}" aria-label="{{ shop.name }}" class="logo__image-link logo__image-link--other{% unless section.settings.logo %} logo__image-link--single{% endunless %}">
+		<a href="https://www.bldgactive.com/" aria-label="{{ shop.name }}" class="logo__image-link logo__image-link--other{% unless section.settings.logo %} logo__image-link--single{% endunless %}">
 			{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 			{%- assign image_widths = "[50,60,70,80,90,100,110,120,130,140,150,160,170,180,200,220,240,260,280,300,320,340,360,380,400,420,440,460,480,500]" -%}
 			{%- assign logo_padding_top = 1 | divided_by: image.aspect_ratio | times: 100 | round: 1 -%}
@@ -93,7 +93,7 @@
 {%- capture logo_home -%}
 	{%- assign image = section.settings.logo -%}
 	{%- if image != blank -%}
-		<a href="{{ routes.root_url }}" aria-label="{{ shop.name }}" class="logo__image-link logo__image-link--home{% unless section.settings.logo_not_home %} logo__image-link--single{% endunless %}">
+		<a href="https://www.bldgactive.com/" aria-label="{{ shop.name }}" class="logo__image-link logo__image-link--home{% unless section.settings.logo_not_home %} logo__image-link--single{% endunless %}">
 			{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 			{%- assign image_widths = "[50, 100, 150, 200, 250, 300, 350, 400, 500, 700, 800]" -%}
 			{%- assign logo_padding_top = 1 | divided_by: image.aspect_ratio | times: 100 | round: 1 -%}
@@ -123,7 +123,7 @@
 		{{- logo_home -}}
 
 		{%- if section.settings.show_shop_name -%}
-			<a class="logo__text-link{% if logo_home != blank or logo_not_home != blank %} logo__text-link--has-image{% endif %}" href="{{ routes.root_url }}">{{ shop.name }}</a>
+			<a class="logo__text-link{% if logo_home != blank or logo_not_home != blank %} logo__text-link--has-image{% endif %}" href="https://www.bldgactive.com/">{{ shop.name }}</a>
 		{%- endif -%}
 	</h1>
 {%- endif -%}

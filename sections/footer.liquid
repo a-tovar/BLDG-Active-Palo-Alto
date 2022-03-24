@@ -19,7 +19,7 @@
 		{%- if section.settings.image != blank or section.settings.show_shop_name -%}
 			<div class="footer-content__logo">
 				{%- if section.settings.image != blank -%}
-					<a href="{{ routes.root_url }}" class="footer-content__logo__image">
+					<a href="https://www.bldgactive.com/" class="footer-content__logo__image">
 						{%- capture image_attributes -%}
 							width="{{ section.settings.logo_width }}"
 						{%- endcapture -%}
@@ -33,7 +33,7 @@
 				{%- endif -%}
 
 				{%- if section.settings.show_shop_name -%}
-					<a class="footer-content__logo__shop-name h4" href="{{ routes.root_url }}">{{ shop.name }}</a>
+					<a class="footer-content__logo__shop-name h4" href="https://www.bldgactive.com/">{{ shop.name }}</a>
 				{%- endif -%}
 			</div>
 		{%- endif -%}

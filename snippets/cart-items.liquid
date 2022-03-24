@@ -225,7 +225,7 @@
             {%- if settings.continue_shopping_link != blank -%}
               {%- assign continue_shopping_link = settings.continue_shopping_link -%}
             {%- else -%}
-              {%- assign continue_shopping_link = routes.root_url -%}
+              {%- assign continue_shopping_link = 'https://www.bldgactive.com/' -%}
             {%- endif -%}
 
             <a href="{{ continue_shopping_link }}" class="btn btn--secondary btn--continue-shopping" data-continue-shopping{% if settings.continue_shopping_link != blank %} data-custom-link{% endif %}>{{ 'cart.general.continue_shopping' | t }}</a>
