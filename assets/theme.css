@@ -45,14 +45,14 @@
   --disabled-grey-darken: var(---color-disabled-grey-darken);
 
   /* Font Sizes */
-  --grid-item-fs-lg: clamp(0.5rem, 3.9vw + 0.1rem, 1.9rem);
-  --grid-item-fs-med: clamp(0.5rem, 2.7vw + 0.1rem, 1.45rem);
-  --grid-item-fs-sm: clamp(0.5rem, 2.2vw + 0.1rem, 1.09rem);
+  --grid-item-fs-lg: clamp(0.5rem, 3.9vw + 0.1rem, 1.75rem);
+  --grid-item-fs-med: clamp(0.5rem, 2.7vw + 0.1rem, 1.3rem);
+  --grid-item-fs-sm: clamp(0.5rem, 2.2vw + 0.1rem, 1rem);
   --grid-item-fs-submit-btn: clamp(0.9rem, 4vw + 0.1rem, 0.82rem);
-  --grid-item-fs-xsm: clamp(0.38rem, 1.3vw + 0.1rem, 0.82rem);
+  --grid-item-fs-xsm: clamp(0.38rem, 1.3vw + 0.1rem, 0.65rem);
 }
 
-@media only screen and (min-width: 1319px) {
+@media only screen and (min-width: 1320px) {
   :root {
      /* Font Sizes */
     --grid-item-fs-lg: clamp(0.8rem, 1.9vw + 0.1rem, 1.75rem);
@@ -64,10 +64,10 @@
 @media only screen and (min-width: 1024px) and (max-width: 1319px) {
   :root {
      /* Font Sizes */
-    --grid-item-fs-lg: clamp(1.75rem, 3vw + 0.1rem, 1.9rem);
-    --grid-item-fs-med: clamp(1.23rem, 2.1vw + 0.1rem, 1.4rem);
-    --grid-item-fs-sm: clamp(0.97rem, 1.6vw + 0.1rem, 1.2rem);
-    --grid-item-fs-xsm: clamp(0.7rem, 1vw + 0.1rem, 1rem);
+    --grid-item-fs-lg: clamp(1.75rem, 3vw + 0.1rem, 1.75rem);
+    --grid-item-fs-med: clamp(1.23rem, 2.1vw + 0.1rem, 1.26rem);
+    --grid-item-fs-sm: clamp(0.97rem, 1.6vw + 0.1rem, 0.95rem);
+    --grid-item-fs-xsm: clamp(0.7rem, 1vw + 0.1rem, 0.65rem);
   }
 }
 
@@ -2286,6 +2286,17 @@ html {
   display: block;
   overflow: initial;
   min-height: var(--content-min);
+  padding-bottom: 5em;
+}
+@media only screen and (min-width: 480px) and (max-width: 1023px) {
+  .main-content {
+    padding-bottom: 12em;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .main-content {
+    padding-bottom: 7em;
+  }
 }
 .has-transparent-header .main-content {
   padding-top: 0;
@@ -11858,11 +11869,6 @@ input[type="radio"].variant-input {
 }
 
 @media only screen and (min-width: 1440px) {
-  .grid {
-    /* max-width: 980px;
-    margin-right: auto;
-    gap: 77.7px 115.2px; */
-  }
   .product-grid-item {
     height: 27.7vw;
     padding: 15.46px 19.91px 29.57px 19.91px;
@@ -11890,20 +11896,13 @@ input[type="radio"].variant-input {
   }
 }
 
-@media only screen and (min-width: 1319px) {
+@media only screen and (min-width: 1320px) {
   .product-grid-item {
-    width: 17.7vw;
     height: 27.7vw;
   }
 }
 
-@media only screen and (min-width: 1319px) and (max-width: 1439px) {
-  .grid {
-    /* gap: 5.4vw 8vw; */
-  }
-  .product-grid-item {
-    padding: 1vw 1.3vw 2vw 1.3vw;
-  }
+@media only screen and (min-width: 1320px) and (max-width: 1439px) {
   .product-grid-item__button {
     width: 43%;
     height: 2.1vw;
@@ -11925,7 +11924,6 @@ input[type="radio"].variant-input {
 @media only screen and (min-width: 1024px) and (max-width: 1319px) {
   .product-grid-item {
     height: 42.7vw;
-    padding: 2.7vw 1.9vw;
   }
   .product-grid-item__button {
     width: 43%;
