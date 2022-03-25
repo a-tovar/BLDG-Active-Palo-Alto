@@ -13,6 +13,38 @@
 	.footer-content__logo__image { width: {{ section.settings.logo_width }}px; }
 {%- endstyle -%}
 
+<style>
+	.footer-social-wrapper {
+		display: flex;
+	}
+	@media only screen and (min-width: 767px) {
+		.footer-social-wrapper {
+			align-self: flex-end;
+		}
+	}
+	.footer-social-text {
+		margin-top: 27px;
+		margin-right: 10px;
+	}
+	.footer-social-text span {
+		display: block;
+	}
+	.footer-social-text span:nth-of-type(2) {
+		color: #FE4E1E;
+	}
+	.footer-block:nth-child(2) .footer-links {
+		-moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+	}
+	.footer-links li {
+		font-weight: 500;
+	}
+</style>
+
 <footer class="site-footer" role="contentinfo" data-section-id="{{ section.id }}" data-section-type="footer">
 	<div class="footer-content wrapper">
 
@@ -138,15 +170,21 @@
 					</div>
 				{%- endcase -%}
 			{%- endfor -%}
+
+			{%- if section.settings.show_social_links -%}
+			<div class="footer-social-wrapper">
+				<div class="footer-social-text h5">
+					<span>get to</span>
+					<span>know us.</span>
+				</div>
+				{%- render 'footer-social' -%}
+			</div>
+			{%- endif -%}
 		</div>
 	</div>
 
 	<div class="footer-bottom wrapper">
 		{%- render 'cross-border' -%}
-
-		{%- if section.settings.show_social_links -%}
-			{%- render 'footer-social' -%}
-		{%- endif -%}
 
 		{%- render 'footer-copyright' -%}
 

@@ -11727,7 +11727,7 @@ input[type="radio"].variant-input {
 }
 .product-form__buttons-grid {
   width: 100%; 
-  max-width: 364px;
+  max-width: 400px;
   height: 3.4rem;
   grid-template-columns: minmax(0, 1fr);
 }
@@ -11797,6 +11797,7 @@ input[type="radio"].variant-input {
   display: flex;
   align-items: center;
   margin-left: 0.7em;
+  height: 100%;
 }
 .product-form__submit-divider {
   font-weight: 700;
