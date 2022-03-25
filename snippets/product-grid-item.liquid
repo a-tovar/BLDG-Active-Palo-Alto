@@ -70,9 +70,19 @@
   data-product-id="{{ product.id }}"
 >
   <div class="product-grid-item__buttons">
+    {%- form 'product', product -%}
+      <input type="hidden" name="quantity" value="1">
+      <input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ current_variant.id }}">
+      <button type="submit" name="add" class="btn btn--quick-buy product-grid-item__button add-to-cart__button" data-button-quick-buy>
+        <span>{{ 'products.general.add_to_cart' | t | upcase }}</span>
+        {%- render 'icon-loading' -%}
+      </button>
+    {%- endform -%}
+    {%- comment -%}
     <button type="submit" name="add" class="product-grid-item__button add-to-cart__button">
       ADD TO CART
     </button>
+    {%- endcomment -%}
     <a href="{{ product.url | within: collection }}" class="product-grid-item__button learn-more__button">
       LEARN MORE
     </a>
@@ -213,6 +223,7 @@
             {{- 'products.general.quick_view' | t -}}
           </a>
         {%- elsif settings.quick_button == 'buy' -%}
+          {%- comment -%}
           {%- form 'product', product -%}
             <input type="hidden" name="quantity" value="1">
             <input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ current_variant.id }}">
@@ -221,6 +232,7 @@
               {%- render 'icon-loading' -%}
             </button>
           {%- endform -%}
+          {%- endcomment -%}
         {%- endif -%}
       </div>
     {%- endunless -%}
