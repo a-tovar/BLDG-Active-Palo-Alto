@@ -11241,7 +11241,6 @@ input[type="radio"].variant-input {
 .testimonial__user__image {
   top: 0;
   position: relative;
-  vertical-align: middle;
   display: block;
   min-height: 32px;
 }
@@ -11699,7 +11698,7 @@ input[type="radio"].variant-input {
   color: #ff6732;
 }
 
-/* PRODUCT-FORM */
+/* PRODUCT FORM */
 .product-form__radio-div {
   display: flex;
   flex-direction: column;
@@ -11743,7 +11742,7 @@ input[type="radio"].variant-input {
 }
 .product-form__submit-btn {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   padding: 0;
   font-size: var(--grid-item-fs-submit-btn);
@@ -11814,6 +11813,27 @@ input[type="radio"].variant-input {
   font-size: 20px;
   margin: 0 0.75em;
   height: 65%;
+}
+
+/* Frequently Bought Together */
+.cbb-frequently-bought-recommendations-container {
+  display: flex;
+  justify-content: center;
+  /* max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+.cbb-frequently-bought-title {
+  text-align: center;
+}
+.cbb-frequently-bought-selector-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.cbb-frequently-bought-form {
+  /* max-width: 595px; */
 }
 
 /* Related Products */
