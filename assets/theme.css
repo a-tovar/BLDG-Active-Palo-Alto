@@ -11848,23 +11848,24 @@ input[type="radio"].variant-input {
 
 /* Frequently Bought Together */
 .cbb-frequently-bought-recommendations-container {
-  display: flex;
-  justify-content: center;
-  /* max-width: 850px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
+
 .cbb-frequently-bought-title {
-  text-align: center;
+  text-align: center !important;
 }
+
 .cbb-frequently-bought-selector-list {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
 }
-.cbb-frequently-bought-form {
-  /* max-width: 595px; */
+
+@media only screen and (min-width: 436px) {
+  .cbb-frequently-bought-selector-list {
+    align-items: center !important;
+  }
 }
 
 /* Related Products */
